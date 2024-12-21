@@ -49,7 +49,7 @@ module.exports = client = async (client, m, chatUpdate, store) => {
     const kontributor = JSON.parse(fs.readFileSync('./start/lib/database/owner.json'));
 
     const botNumber = await client.decodeJid(client.user.id);
-    const Access = [botNumber, ...kontributor, ...global.owner];
+    const Access = [botNumber, ...kontributor, ...global.owner].map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender);
     const isCmd = body.startsWith(prefix);
     const command = body.slice(1).trim().split(/ +/).shift().toLowerCase();
     const args = body.trim().split(/ +/).slice(1);
